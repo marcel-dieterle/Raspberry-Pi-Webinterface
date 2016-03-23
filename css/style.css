@@ -1,0 +1,545 @@
+html {
+	height: 100%;
+}
+
+body {
+	font-family: "Roboto", Arial, sans-serif;
+    min-height: 100%;
+    -webkit-user-select: none;
+    background-attachment: fixed;
+    background: #1E272D;
+}
+
+.jscolor {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+}
+
+.canvasjs-chart-credit {
+	display: none !important;
+}
+
+.myhome-wrapper {
+	padding:20px;
+}
+
+.desktop-area {
+	color: #fff;
+	position: relative;
+	-webkit-transition: all 200ms;
+	-moz-transition: all 200ms;
+	-ms-transition: all 200ms;
+	-o-transition: all 200ms;
+	transition: all 200ms;
+	margin-bottom: 30px;
+}
+
+.desktop-area:hover {
+	box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+
+.desktop-area .title {
+	font-size: 28px;
+	font-weight: 100;
+	padding:10px 0;
+	text-align: center;
+	background-color: rgba(0,0,0,0.2);
+	color:#fff;
+	position: relative;
+}
+
+.desktop-area .title .icon {
+	width:32px;
+	height:32px;
+	position: absolute;
+	top:14px;
+	left:14px;
+	-webkit-transition: opacity 200ms;
+	-moz-transition: opacity 200ms;
+	-ms-transition: opacity 200ms;
+	-o-transition: opacity 200ms;
+	transition: opacity 200ms;
+}
+
+.desktop-area.temperature  .title .icon {
+	background-image: url(images/icons/temperature.svg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.desktop-area.weather  .title .icon {
+	background-image: url(images/icons/weather.svg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.desktop-area.light  .title .icon {
+	background-image: url(images/icons/light.svg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.desktop-area.camera  .title .icon {
+	background-image: url(images/icons/camera.svg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.desktop-area .content {
+	padding:18px 15px;
+}
+
+.desktop-area .full-width-content {
+	
+}
+
+.desktop-area.temperature {
+	background: #ff670f;
+	background: -moz-linear-gradient(top,  #ff670f 0%, #ff670f 100%);
+	background: -webkit-linear-gradient(top,  #ff670f 0%,#ff670f 100%);
+	background: linear-gradient(to bottom,  #ff670f 0%,#ff670f 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670f', endColorstr='#ff670f',GradientType=0 );
+}
+
+.desktop-area.calendar {
+	background: #B90FFF;
+	background: -moz-linear-gradient(top,  #B90FFF 0%, #8715AF 100%);
+	background: -webkit-linear-gradient(top,  #B90FFF 0%,#8715AF 100%);
+	background: linear-gradient(to bottom, #B90FFF 0%,#8715AF 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#B90FFF', endColorstr='#8715AF',GradientType=0 );
+}
+
+.desktop-area.weather {
+	background: #499bea;
+	background: -moz-linear-gradient(top,  #499bea 0%, #207ce5 100%);
+	background: -webkit-linear-gradient(top,  #499bea 0%,#207ce5 100%);
+	background: linear-gradient(to bottom,  #499bea 0%,#207ce5 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#207ce5',GradientType=0 );
+}
+
+.desktop-area.light {
+	background: #fce61e;
+	background: -moz-linear-gradient(top,  #fce61e 0%, #FCBC46 100%);
+	background: -webkit-linear-gradient(top,  #fce61e 0%,#FCBC46 100%);
+	background: linear-gradient(to bottom,  #fce61e 0%,#FCBC46 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fce61e', endColorstr='#FCBC46',GradientType=0 );
+}
+
+.desktop-area.camera {
+	background: #00C87E;
+	background: -moz-linear-gradient(top,  #00C87E 0%, #07B555 100%);
+	background: -webkit-linear-gradient(top,  #00C87E 0%,#07B555 100%);
+	background: linear-gradient(to bottom,  #00C87E 0%,#07B555 100%);
+	background: linear-gradient(to bottom, #00C87E 0%,#07B555 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00C87E', endColorstr='#07B555',GradientType=0 );
+}
+
+.desktop-area.news {
+	background: #FF0000;
+	background: -moz-linear-gradient(top,  #FF0000 0%, #AD1414 100%);
+	background: -webkit-linear-gradient(top,  #FF0000 0%,#AD1414 100%);
+	background: linear-gradient(to bottom,  #FF0000 0%,#AD1414 100%);
+	background: linear-gradient(to bottom, #FF0000 0%,#AD1414 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FF0000', endColorstr='#AD1414',GradientType=0 );
+}
+
+.desktop-area .toggle-button {
+	display: inline-block;
+	min-width: 50px;
+	padding:3px 6px;
+	border:none;
+	color:rgba(255,255,255,0.5);
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 3px;
+	font-weight: 700;
+	font-size: 14px;
+	-webkit-transition: all 150ms;
+	-moz-transition: all 150ms;
+	-ms-transition: all 150ms;
+	-o-transition: all 150ms;
+	transition: all 150ms;
+	outline: none;
+	margin-right: 5px;
+}
+
+.desktop-area .toggle-button:hover {
+	cursor: pointer;
+	background-color: rgba(0,0,0,0.25);
+}
+
+.desktop-area .button-row.active .toggle-button {
+	background-color: rgba(0,0,0,0.5);
+	color:#fff;
+}
+
+.button-row .button-label {
+	color:rgba(0,0,0,0.4);
+	-webkit-transition: color 150ms;
+	-moz-transition: color 150ms;
+	-ms-transition: color 150ms;
+	-o-transition: color 150ms;
+	transition: color 150ms;
+}
+
+.button-row.active .button-label {
+	color:rgba(0,0,0,0.8);
+}
+
+.label {
+	margin-bottom: 5px;
+	font-weight: 400;
+	font-size: 16px;
+}
+
+.big-number .number {
+    font-weight: 100;
+    font-size: 50px;
+    line-height: 60px;
+    margin-bottom: 10px;
+}
+
+.today-container {
+	width: 100%;
+}
+
+.day-container {
+	float: left;
+	width: 50%;
+}
+
+.desktop-area .content.camera-content {
+	padding: 15px;
+	position: relative;
+}
+
+.camera-content img {
+	width:100%;
+}
+
+.camera-content .red-dot {
+	display: block;
+	width:14px;
+	height:14px;
+	border-radius: 50%;
+	box-shadow: 0 0 2px rgba(0,0,0,0.3);
+	background-color: #FF0000;
+	position: absolute;
+	top:25px;
+	right:25px;
+    -webkit-animation: blink 1.5s linear infinite;
+    -moz-animation: blink 1.5s linear infinite;
+    animation: blink 1.5s linear infinite;
+} 
+
+@keyframes blink {  
+    0% { opacity: 1 }
+    30% { opacity: 0.7 }
+    50% { opacity: 0 }
+    70% { opacity: 0.7 }
+    100% { opacity: 1 }
+}
+
+#current-time {
+	font-size: 60px;
+	margin:20px 0;
+	text-align: center;
+	font-weight: 100;
+	position: relative;
+	color:#fff;
+	display: none;
+}
+
+.item-list li {
+	font-size: 16px;
+	font-weight: 300;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	-webkit-transition: all 150ms;
+	-moz-transition: all 150ms;
+	-ms-transition: all 150ms;
+	-o-transition: all 150ms;
+	transition: all 150ms;
+}
+
+.item-list li:hover {
+	background-color: rgba(0,0,0,0.1);
+}
+
+.item-list li .info {
+	font-weight: 400;
+	font-size: 13px;
+	padding:6px 10px;
+	background-color: rgba(0,0,0,0.1);
+}
+
+.item-list li .info .date {
+
+}
+
+.item-list li .info .location {
+	text-align: right;
+}
+
+.item-list li .summary {
+	padding:10px;
+}
+
+.item-list li a {
+	color:rgba(255,255,255,0.9);
+}
+
+.item-list li a:hover,
+.item-list li a:active,
+.item-list li a:focus {
+	color:#fff;
+	text-decoration: none;
+}
+
+#weather li {
+	font-size: 16px;
+	font-weight: 300;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	-webkit-transition: all 150ms;
+	-moz-transition: all 150ms;
+	-ms-transition: all 150ms;
+	-o-transition: all 150ms;
+	transition: all 150ms;
+}
+
+#weather li:hover {
+	background-color: rgba(0,0,0,0.1);
+}
+
+#weather li .weather-info {
+	font-weight: 400;
+	font-size: 13px;
+	padding:6px 10px;
+	background-color: rgba(0,0,0,0.05);
+}
+
+#weather li .weather-info .date {
+	float: left;
+	font-weight: 500;
+}
+
+#weather li .weather-info .description {
+	text-align: right;
+}
+
+#weather li .degree {
+	font-weight: 100;
+	font-size: 50px;
+	padding: 0 15px;
+}
+
+#weather li .degree .degree-inner {
+	padding:10px;
+	line-height: 50px;
+}
+
+#weather li .degree-min-max {
+	text-align: right;
+	font-size: 18px;
+	line-height: 35px;
+}
+
+#weather li .degree-min {
+	background-image: url(images/icons/down-arrow.svg);
+	background-size: 14px;
+	background-repeat: no-repeat;
+	background-position: right center;
+	padding: 0 20px 0 0;
+}
+#weather li .degree-max {
+	background-image: url(images/icons/up-arrow.svg);
+	background-size: 14px;
+	background-repeat: no-repeat;
+	background-position: right center;
+	padding: 0 20px 0 0;
+}
+
+
+
+#lights .light,
+#lights .light:active,
+#lights .light:focus {
+	font-weight: 500;
+	color:#222;
+	padding: 10px;
+	background: #f9d534;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	background: #f9d534;
+	background: #f9d534;
+	background: -moz-linear-gradient(top,  #f9d534 0%, #f9d534 86%, #fcc63c 100%);
+	background: -webkit-linear-gradient(top,  #f9d534 0%,#f9d534 86%,#fcc63c 100%);
+	background: linear-gradient(to bottom,  #f9d534 0%,#f9d534 86%,#fcc63c 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9d534', endColorstr='#fcc63c',GradientType=0 );
+	-webkit-tap-highlight-color: rgba(0,0,0,0.3);
+	line-height: 22px;
+}
+
+#lights .light .toggle:hover {
+	cursor: pointer;
+}
+
+#lights .light.on {
+
+}
+
+#lights .light .toggle {
+	display: inline-block;
+	width: 36px;
+    height: 22px;
+	margin-right: 8px;
+	border:2px solid rgba(0,0,0,0.3);
+	position: relative;
+	border-radius: 10px;
+	background-color: rgba(0,0,0,0.3);
+	-webkit-transition: all 150ms;
+	-moz-transition: all 150ms;
+	-ms-transition: all 150ms;
+	-o-transition: all 150ms;
+	transition: all 150ms;
+	float: left;
+}
+
+
+#lights .light.on .toggle {
+	background-color: #02C475;
+}
+
+#lights .light .toggle::after {
+	content: "";
+	display: inline-block;
+	width:18px;
+	height:18px;
+	position: absolute;
+	border-radius: 50%;
+	top:0px;
+	background-color: #fff;
+	-webkit-transition: all 150ms;
+	-moz-transition: all 150ms;
+	-ms-transition: all 150ms;
+	-o-transition: all 150ms;
+	transition: all 150ms;
+	left:-1px;
+}
+
+#lights .light .toggle:active::after {
+	box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+#lights .light.on .toggle::after {
+	left:14px;
+}
+
+
+#scenes li {
+	display: inline-block;
+	width:25%;
+	padding:6px;
+	color:rgba(0,0,0,0.7);
+	border-right: 1px solid rgba(0,0,0,0.1);
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+	text-align: center;
+}
+
+#scenes li:hover {
+	cursor: pointer;
+	background-color: rgba(0,0,0,0.05);
+}
+
+#scenes li:nth-child(4){
+	border-right:0;
+}
+
+
+@media screen and (min-width:1200px){
+	#current-time {
+		display: block;
+		font-size: 100px;
+		position: fixed;
+		bottom:30px;
+		right:30px;
+		margin:0;
+		line-height: 100px;
+	}
+}
+
+.loading {
+	padding: 20px 40px;
+	background-image: url(images/icons/loading.gif);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.spinner {
+  margin: 100px auto 0;
+  width: 70px;
+  text-align: center;
+  height:100px;
+}
+
+.spinner > div {
+  width: 14px;
+  height: 14px;
+  background-color: #fff;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% { 
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+
+/* COLORPICKER */
+
+.minicolors-swatch {
+	border:0;
+}
+
+.minicolors-theme-default.minicolors {
+	float: right;
+}
+
+.minicolors-theme-default .minicolors-swatch {
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.minicolors-theme-default .minicolors-swatch:hover {
+	cursor: pointer;
+}
+
+.minicolors-position-bottom .minicolors-panel {
+	width:152px;
+}
+
+.minicolors-slider-brightness .minicolors-slider {
+	display: none;
+}
