@@ -138,13 +138,11 @@
 	</div>
 	
 	<script src="js/config.js"></script>
-	<script src="js/data.js"></script>
 	<script src="js/libs/jquery-2.2.1.min.js"></script>
 	<script src="js/libs/jquery.minicolors.min.js"></script>
 	<script src="js/libs/jquery.canvasjs.min.js"></script>
 	<script src="js/libs/ical_parser.js"></script>
 	<script src="js/hue.js"></script>
 	<script src="js/functions.js"></script>
-	
 </body>
 </html>

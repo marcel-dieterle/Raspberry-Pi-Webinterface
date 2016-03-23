@@ -3,21 +3,37 @@ var hueScenes = [];
 var myHomeApp = {
 	repeaters : [],
 	start : function(){
+		// Display the current local time
 		myHomeApp.initClock();
+		// Get current weather info from OpenWeatherMap
 		myHomeApp.weather.getCurrentWeather();
+		// Get calendar events from public iCloud calendar
 		myHomeApp.calendar.getCalEvents();
+		// Get and display all lights connected to the hue bridge
 		myHomeApp.hue.getLights();
+		// Get and display scenes stored in the hue bridge
 		myHomeApp.hue.getScenes();
+		// Get live temperature from connected sensors
 		myHomeApp.temperature.update();
+		// Initialize update interval to keep temperature updated
 		myHomeApp.temperature.startInterval();
+		// Display temperature history chart from stored values in SQLITE database
 		myHomeApp.temperature.getHistory();
+		// Display news from RSS feed
 		myHomeApp.news.loadNews();
+	},
+	getCurrentTime : function(){
+		var date = new Date();
+		var min = date.getMinutes();
+		min = min < 10 ? "0" + min : min;
+		var time = date.getHours() + ":" + min;
+		return time;
 	},
 	temperature : {
 		startInterval : function(timeout){
 			setInterval(function(){
 				myHomeApp.temperature.update();
-			},20000);
+			}, config.api.temperature.updateInterval);
 		},
 		update : function(){
 			$.ajax({
@@ -172,9 +188,9 @@ var myHomeApp = {
 		}
 	},
 	initClock : function(){
-		$(".data-placeholder[data-placeholder-id='current-time']").text(appData.currentTime);
+		$(".data-placeholder[data-placeholder-id='current-time']").text(myHomeApp.getCurrentTime());
 		var clock = setInterval(function(){
-			$(".data-placeholder[data-placeholder-id='current-time']").text(appData.currentTime);
+			$(".data-placeholder[data-placeholder-id='current-time']").text(myHomeApp.getCurrentTime());
 		},5000);
 	},
 	calendar : {

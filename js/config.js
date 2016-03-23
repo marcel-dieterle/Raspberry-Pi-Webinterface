@@ -10,7 +10,8 @@ var config = {
 			history : {
 				url: "/services/temperature/db-select.php",
 				limit: 500
-			}
+			},
+			updateInterval : 20000
 		},
 		calendar : {
 			url : "/services/calendar.php"
