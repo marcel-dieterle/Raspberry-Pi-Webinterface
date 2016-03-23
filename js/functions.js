@@ -1,7 +1,6 @@
 var hueScenes = [];
 
 var myHomeApp = {
-	repeaters : [],
 	start : function(){
 		// Display the current local time
 		myHomeApp.initClock();
@@ -31,11 +30,13 @@ var myHomeApp = {
 	},
 	temperature : {
 		startInterval : function(timeout){
+			// Initialize the update interval for live temperature sensor data
 			setInterval(function(){
 				myHomeApp.temperature.update();
 			}, config.api.temperature.updateInterval);
 		},
 		update : function(){
+			// Update live temperature from sensor
 			$.ajax({
 				method: "GET",
 				url: config.api.temperature.url
@@ -48,6 +49,7 @@ var myHomeApp = {
 			});
 		},
 		getHistory : function(){
+			// Get temperature history data from SQL db
 			$.ajax({
 				method: "GET",
 				url: config.api.temperature.history.url,
@@ -65,9 +67,7 @@ var myHomeApp = {
 		initHistoryChart : function(data) {
 			var themeColorDark = "rgba(0,0,0,0.8)";
 			var themeColorWhite = "rgba(255,255,255,0.8)";
-
 			var dataSetColors = ["#00C87E","#499bea"];
-
 			var dataSets = [];
 			var i = 0;
 
@@ -84,7 +84,6 @@ var myHomeApp = {
 				});
 
 				var color = dataSetColors[i];
-
 				var dataSet = {
 					type: "line",
 					showInLegend: true,
@@ -138,23 +137,21 @@ var myHomeApp = {
 			$("#chart-container").CanvasJSChart(options);
 		}
 	},
-	stopUpdateRepeater : function(receiverId){
-		clearInterval(this.repeaters[receiverId]);
-	},
 	weather : {
 		getCurrentWeather : function(){
+			// Get weather data from OpenWeatherMap
 			$.ajax({
 				method: "GET",
 				url: config.api.weather.url,
 				data: {
-					id: "2806946",
-					cnt: 3,
-					units: "metric",
-					lang: "de",
+					id: config.api.weather.cityId,
+					cnt: config.api.weather.days,
+					units: config.api.weather.units,
+					lang: config.api.weather.language,
 					appid: config.api.weather.appId
 				}
 			}).done(function(currentWeatherData) {
-				var days = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
+				var days = config.dayNames;
 				var weatherContent = "";
 				count = 1;
 
@@ -188,9 +185,10 @@ var myHomeApp = {
 		}
 	},
 	initClock : function(){
-		$(".data-placeholder[data-placeholder-id='current-time']").text(myHomeApp.getCurrentTime());
+		// Initialize the clock
+		$("#current-time").text(myHomeApp.getCurrentTime());
 		var clock = setInterval(function(){
-			$(".data-placeholder[data-placeholder-id='current-time']").text(myHomeApp.getCurrentTime());
+			$("#current-time").text(myHomeApp.getCurrentTime());
 		},5000);
 	},
 	calendar : {
@@ -219,8 +217,8 @@ var myHomeApp = {
 
 				if(tempDate != calEvent.start_date){
 					switch(calEvent.start_date){
-						case today: startDateText = "Heute"; break;
-						case tomorrow: startDateText = "Morgen"; break;
+						case today: startDateText = config.api.calendar.text.today; break;
+						case tomorrow: startDateText = config.api.calendar.text.tomorrow; break;
 						default: startDateText = calEvent.start_date_long_no_year; break;
 					}
 
@@ -228,7 +226,6 @@ var myHomeApp = {
 				}
 
 				var location = calEvent.LOCATION !== undefined ? "<div class='col-xs-7 location'>" + calEvent.LOCATION + "</div>" : "";
-
 				eventContent += "<li><div class='info'>";
 				eventContent += "<div class='row'><div class='col-xs-5 date'>" + startDateText + " - " + calEvent.start_time + "</div>" + location.replace("Oberwolfach,","");
 				eventContent += "</div></div><div class='summary'>" + calEvent.SUMMARY + "</div></li>";
@@ -271,13 +268,13 @@ var myHomeApp = {
 					var lightsContent = "";
 					$.each(lights, function(index, light){
 						var lightState = light.state.on === true ? "on" : "";
+						// Convert XY to HEX color
 						var lightHexColor = colors.CIE1931ToHex(light.state.xy[0], light.state.xy[1], 1);
 
 						lightsContent += "<li class='light " + lightState + "' data-state='" + light.state.on + "' data-id='" + (parseInt(index,10)) + "'>";
 						lightsContent += "<span class='toggle'></span>" + light.name;
 						lightsContent += "<span data-light-id='" + index + "' data-color='#" + lightHexColor + "' class='light-color-picker'></span>";
 						lightsContent += "</li>";
-
 					});
 					$("#lights").html(lightsContent);
 
@@ -294,6 +291,7 @@ var myHomeApp = {
 							control: "brightness",
 							change: function(value, opacity) {
 								var val = value.replace("#","");
+								// Convert HEX to XY color
 								var newColor = colors.hexToCIE1931(val);
 								myHomeApp.hue.setLightColor(light, newColor);
 							}
@@ -303,8 +301,8 @@ var myHomeApp = {
 			});
 		},
 		initLightToggle : function(){
+			// Initialize buttons to toggle lights on and off
 			$("#lights .light").on("click", ".toggle", function(){
-				// toggle lights on and off
 				var light = $(this).parent();
 				var id = light.data("id");
 				var newState = light.attr("data-state") == "true" ? false : true;
@@ -334,7 +332,7 @@ var myHomeApp = {
 			});
 		},
 		setScene : function(sceneId){
-			
+			// Activate a scene by using the group api
 			$.ajax({
 				method: "GET",
 				url: config.api.hue.url,
@@ -344,13 +342,14 @@ var myHomeApp = {
 				}
 			}).done(function(response) {
 				setTimeout(function(){
+					// Wait a sec to reload light status after fading
 					myHomeApp.hue.getLights();
 				},1500);
 			});
 		},
 		toggleLight : function(id, state){
+			// Toggle lights on and off
 			var light = $("#lights").find(".light[data-id='" + id + "']");
-
 			$.ajax({
 				method: "GET",
 				url: config.api.hue.url,
@@ -371,6 +370,7 @@ var myHomeApp = {
 			});
 		},
 		setLightColor : function(id, color){
+			// Set color for a single light
 			$.ajax({
 				method: "GET",
 				url: config.api.hue.url,
