@@ -1,4 +1,4 @@
-##myHome
+##Raspberry-Pi-Webinterface
 A webbased interface to display and manage information like icloud calendar events, weather forecast and sensor data, running on a raspberry pi.
 
 ###Environment
